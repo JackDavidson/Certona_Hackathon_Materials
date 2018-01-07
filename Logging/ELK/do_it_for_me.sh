@@ -18,3 +18,6 @@ echo 'kibana should be up and running.'
 echo
 echo 'running docker processes:'
 sudo docker ps
+echo
+echo 'opening port for kibana to the world'
+sudo ufw allow 5601

@@ -13,7 +13,7 @@ echo 'elastic search should be up and running.'
 echo
 echo
 echo 'starting up kibana oss (without X-Pack)'
-sudo docker run --net esnetwork --ip $ELASTIC_SEARCH_IP -p 5601:5601 --net esnetwork --name=kibana_for_certona -d -e ELASTICSEARCH_URL='http://'$ELASTIC_SEARCH_IP':9200' -e ELASTICSEARCH_PASSWORD='ElasticPass' docker.elastic.co/kibana/kibana-oss:6.1.1 > /dev/null 2>/dev/null
+sudo docker run --net esnetwork --ip $KIBANA_IP -p 5601:5601 --net esnetwork --name=kibana_for_certona -d -e ELASTICSEARCH_URL='http://'$ELASTIC_SEARCH_IP':9200' -e ELASTICSEARCH_PASSWORD='ElasticPass' docker.elastic.co/kibana/kibana-oss:6.1.1 > /dev/null 2>/dev/null
 echo 'kibana should be up and running.'
 echo
 echo 'running docker processes:'

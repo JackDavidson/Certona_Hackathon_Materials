@@ -10,7 +10,7 @@ echo 'modifying sysctl vm.max_map_count for elastic search'
 sudo sysctl -w vm.max_map_count=262144
 
 echo 'starting up elastic search'
-sudo docker run --net esnetwork --ip $ELASTIC_SEARCH_IP --name=elastic_search_for_certona -d -e ELASTIC_PASSWORD=ElasticPass docker.elastic.co/elasticsearch/elasticsearch-oss:6.1.1 > /dev/null 2>/dev/null
+sudo docker run --net esnetwork --ip $ELASTIC_SEARCH_IP -p 9200:9200 --name=elastic_search_for_certona -d -e ELASTIC_PASSWORD=ElasticPass docker.elastic.co/elasticsearch/elasticsearch-oss:6.1.1 > /dev/null 2>/dev/null
 echo 'elastic search should be up and running.'
 echo
 echo
@@ -19,7 +19,7 @@ sudo docker run --net esnetwork --ip $KIBANA_IP -p 5601:5601 --net esnetwork --n
 echo 'kibana should be up and running.'
 echo
 echo 'starting logstash in a docker image'
-sudo docker run --net esnetwork --ip $LOGSTASH_IP --name=logstash_for_certona --rm -d -v `pwd`/logstash_config/logstash_conf.json:/usr/share/logstash/config/logstash_conf.json docker.elastic.co/logstash/logstash-oss:6.1.1
+sudo docker run --net esnetwork --ip $LOGSTASH_IP --name=logstash_for_certona --rm -d -v `pwd`/logstash_config/:/usr/share/logstash/pipeline/ docker.elastic.co/logstash/logstash-oss:6.1.1
 echo 'logstash should be up and running'
 echo
 echo 'starting filebeat under docker'

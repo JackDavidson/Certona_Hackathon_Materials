@@ -1,0 +1,15 @@
+simply run:
+bash do_it_for_me.sh
+
+then go to your browser and enter:
+http://<server_name>:9200/_cat/indices?v
+
+you should see a message immediately, but give it about a minute and you should see something like:
+
+health status index               uuid                   pri rep docs.count docs.deleted store.size pri.store.size
+yellow open   filebeat-2018.01.07 ctjz0MvhTUSOC-XQcX10wg   5   1       5067            0      1.9mb          1.9mb
+
+Then go to kibana at:
+http://<server_name>:5601
+
+Go ahead and explore kibana for a bit.

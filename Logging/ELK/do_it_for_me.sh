@@ -32,3 +32,4 @@ sudo docker ps
 echo
 echo 'opening port for kibana to the world'
 sudo ufw allow 5601
+sudo ufw allow 9200

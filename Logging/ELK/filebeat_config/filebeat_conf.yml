@@ -8,4 +8,4 @@ filebeat.prospectors:
     pattern: "^\\s"
     match: after
 output.logstash:
-  hosts: ["15.15.1.2:5044"]
+  hosts: ["15.15.1.4:5044"]

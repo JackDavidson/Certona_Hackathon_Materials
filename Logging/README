@@ -1,0 +1,5 @@
+To start all docker containers, simply run:
+bash start_docker_images.sh
+
+To shutdown and destroy all docker containers, simply run:
+bash destroy_docker_images.sh

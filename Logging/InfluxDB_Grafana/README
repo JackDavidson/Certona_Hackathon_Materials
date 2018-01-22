@@ -1,5 +1,5 @@
 simply run:
-bash do_it_for_me.sh
+bash do_it_for_me.sh `pwd`
 
 then go to your browser and enter:
 http://localhost:3000/

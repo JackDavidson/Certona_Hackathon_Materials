@@ -1,0 +1,20 @@
+simply run:
+bash do_it_for_me.sh
+
+then go to your browser and enter:
+http://localhost:3000/
+default username and password are: admin/admin
+
+Once in Grafana, add the influxdb datasource:
+  click on Add New DataSource
+  Name: any name is fine
+  Type: InfluxDB
+  HTTP Settings:
+    URL: http://localhost:8086
+    Access: direct
+  Database: telegraf
+  Save & Test
+    You should receive a successful reply.
+
+Now you can go ahead and explore Grafana.
+Try building a dashboard using the InfluxDB datasource and some metrics being captured by Telegraf.

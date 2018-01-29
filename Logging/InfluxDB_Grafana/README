@@ -1,13 +1,18 @@
-simply run:
-bash do_it_for_me.sh `pwd`
+1. to run this script, first define the esnetwork docker subnet:
+sudo docker network create --subnet=15.15.1.0/24 esnetwork
 
-then go to your browser and enter:
-http://localhost:3000/
+2. then simply run:
+bash do_it_for_me.sh `pwd`
+* note that if you have already started or tried to start the services before, you need
+  ./destroy_containers.sh 
+
+3. then go to your browser and enter:
+http://<server_name>:3000/
 default username and password are: admin/admin
 
 Once in Grafana, add the influxdb datasource:
   click on Add New DataSource
-  Name: any name is fine
+  Name: 'my-datasource' is fine
   Type: InfluxDB
   HTTP Settings:
     URL: http://localhost:8086
@@ -15,6 +20,36 @@ Once in Grafana, add the influxdb datasource:
   Database: telegraf
   Save & Test
     You should receive a successful reply.
+    Click cancel. (Don't worry, its already been added)
 
 Now you can go ahead and explore Grafana.
 Try building a dashboard using the InfluxDB datasource and some metrics being captured by Telegraf.
+
+
+For instructions, first direct your browser to the grafana home page:
+http://<server_name>:3000/?orgId=1
+
+Then go follow:
+https://www.youtube.com/watch?v=sKNZMtoSHN4&index=7&list=PLDGkOdUX1Ujo3wHw9-z5Vo12YLqXRjzg2
+Use the following panel settings:
+  Metrics:
+    Data Source: 'my-datasource'
+    From: 'autogen' 'cpu'
+    Where: blank
+    Select: field(usage_user) mean()
+    Group By: 'time(10s)' 'fill(null)'
+    Format As: 'Time series'
+Click the x at the top right of the configuration to save & exit
+This panel now shows the %CPU of all user processes. That means its excluding
+any CPU used by system processes. Note that in linux 100% means 1 CPU core. If
+you have 4 CPU cores, 400% is max CPU usage.
+    
+
+
+
+For some advanced grafana topics, check out templating:
+https://blog.lwolf.org/post/going-open-source-in-monitoring-part-ii-creating-the-first-dashboard-in-grafana/
+
+And check out the dashboard API, among others:
+http://docs.grafana.org/http_api/dashboard/#dashboard-api
+

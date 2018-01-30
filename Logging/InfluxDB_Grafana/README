@@ -13,6 +13,7 @@ Once in Grafana, add the influxdb datasource:
     URL: http://localhost:8086
     Access: direct
   Database: telegraf
+  Add
   Save & Test
     You should receive a successful reply.
 

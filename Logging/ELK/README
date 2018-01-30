@@ -1,15 +1,26 @@
-simply run:
-bash do_it_for_me.sh `pwd`
+1. to run this script, first define the esnetwork docker subnet:
+sudo docker network create --subnet=15.15.1.0/24 esnetwork
 
-then go to your browser and enter:
+2. then simply run:
+bash do_it_for_me.sh `pwd`
+* note that if you have already started or tried to start the services before, you need
+  ./destroy_containers.sh
+
+3. then go to your browser and enter:
 http://<server_name>:9200/_cat/indices?v
 
-you should see a message immediately, but give it about a minute and you should see something like:
+you should see a message immediately, but give it about a minute and you should see two lines:
 
 health status index               uuid                   pri rep docs.count docs.deleted store.size pri.store.size
 yellow open   filebeat-2018.01.07 ctjz0MvhTUSOC-XQcX10wg   5   1       5067            0      1.9mb          1.9mb
 
-Then go to kibana at:
+4. Then go to kibana at:
 http://<server_name>:5601
 
-Go ahead and explore kibana for a bit.
+5. Go ahead and explore kibana for a bit.
+
+
+The setup script takes your system log and runs it through the full ELK stack.
+As soon as you see the index show up in step 3, you can start kibana and
+explore the index.
+

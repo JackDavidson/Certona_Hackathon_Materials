@@ -24,3 +24,49 @@ The setup script takes your system log and runs it through the full ELK stack.
 As soon as you see the index show up in step 3, you can start kibana and
 explore the index.
 
+
+
+Example Query:
+
+
+first, do:
+
+PUT filebeat-2018.06.06/_mapping/doc
+{
+  "doc" : {
+    "properties": {
+      "system.syslog.program": {
+        "type": "text",
+        "fielddata": true
+      },
+      
+      "host": {
+        "type": "text",
+        "fielddata": true
+      }
+    }
+  }
+}
+
+
+
+then, do:
+
+GET filebeat-2018.06.06/_search
+{
+  "aggs" : {
+    "program" : {
+      "terms" : { 
+        "field" : "system.syslog.program"
+      }, 
+      "aggs" : {
+        "hosts" : {
+          "terms": { 
+            "field" : "host"
+          }
+        }
+      }
+    }
+  }
+}
+
